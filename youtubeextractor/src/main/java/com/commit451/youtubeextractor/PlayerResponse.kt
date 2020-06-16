@@ -2,6 +2,7 @@ package com.commit451.youtubeextractor
 
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
+import kotlin.math.sign
 
 @JsonClass(generateAdapter = true)
 internal data class PlayerResponse(
@@ -28,6 +29,18 @@ internal data class PlayerResponse(
         @Json(name = "url")
         var url: String? = null,
         @Json(name = "cipher")
-        var cipher: String? = null
-    )
+        var cipher: String? = null,
+        @Json(name = "signatureCipher")
+        var signatureCipher: String? = null
+    ) {
+        fun getCipherData(): String {
+            if (cipher?.isNotEmpty() == true) {
+                return cipher!!
+            }
+            if (signatureCipher?.isNotEmpty() == true) {
+                return signatureCipher!!
+            }
+            return ""
+        }
+    }
 }

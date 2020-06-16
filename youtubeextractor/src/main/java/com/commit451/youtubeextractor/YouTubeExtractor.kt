@@ -91,6 +91,13 @@ class YouTubeExtractor private constructor(builder: Builder) {
         }
     }
 
+    fun getVideoUrl(result: YouTubeExtraction): String {
+        return result.streams
+                .filterIsInstance<Stream.VideoStream>()
+                .max()
+                ?.url ?: ""
+    }
+
     private fun title(playerArgs: PlayerArgs, doc: Document): String? {
         return playerArgs.title ?: titleFromHtml(doc)
     }
@@ -191,7 +198,7 @@ class YouTubeExtractor private constructor(builder: Builder) {
             url
         } else {
             // encrypted signature
-            val cipher: Map<String, String> = Util.compatParseMap(format.cipher!!)
+            val cipher: Map<String, String> = Util.compatParseMap(format.getCipherData())
             cipher["url"].toString() + "&" + cipher["sp"] + "=" + JavaScriptUtil.decryptSignature(cipher["s"]!!, decryptionCode)
         }
         map[streamUrl] = itag

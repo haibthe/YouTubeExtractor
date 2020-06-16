@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
 
     companion object {
 
-        private const val GRID_YOUTUBE_ID = "9d8wWcJLnFI"
+        private const val GRID_YOUTUBE_ID = "HaYwvSrT-Ig"
 
         private const val KEY_SAVED_POSITION = "saved_position"
     }
